@@ -1,0 +1,81 @@
+# примеры API-запросов
+
+@baseUrl = http://localhost:8000
+
+###
+GET {{baseUrl}}/locations/1345
+Content-Type: application/json 
+
+###
+# Создание нового груза (характеристики локаций pick-up, delivery определяются по введенному zip-коду); 
+POST {{baseUrl}}/createcargo/
+Content-Type: application/json
+
+{
+  "pickuplocation": "34756",
+  "delieverylocation": "04781",
+  "weight": "",
+  "description": "сардины"
+}
+
+###
+# Получение списка грузов (локации pick-up, delivery, количество ближайших машин до груза ( =< 450 миль));
+GET {{baseUrl}}/cargo/
+Content-Type: application/json
+
+###
+# Получение списка грузов с фильтрацией по весу;
+GET {{baseUrl}}/cargo/?weight=346
+Content-Type: application/json
+###
+
+# Получение информации о конкретном грузе по ID (локации pick-up, delivery, вес, описание, список номеров ВСЕХ машин с расстоянием до выбранного груза);
+GET {{baseUrl}}/retrivecargo/18
+Content-Type: application/json
+
+###
+
+#Редактирование машины по ID (локация (определяется по введенному zip-коду));
+PATCH {{baseUrl}}/vehicles/26/
+Content-Type: application/json
+
+{
+  "currentlocation": "34756"
+}
+
+###
+
+# Редактирование груза по ID (вес, описание);
+PATCH {{baseUrl}}/editcargo/25/
+Content-Type: application/json
+
+{
+  "weight": "400",
+  "description": "яйца"
+}
+
+###
+# Удаление груза по ID. 
+DELETE {{baseUrl}}/editcargo/25/
+Content-Type: application/json
+
+###
+# Создание новой машины
+POST {{baseUrl}}/vehicles/
+Content-Type: application/json
+
+{
+  "uuid": "",
+  "currentlocation": "",
+  "loadcapacity": ""
+}
+
+###
+# Удаление машины по ID. 
+DELETE {{baseUrl}}/editvehicles/51/
+Content-Type: application/json
+
+###
+# список всех машин
+GET {{baseUrl}}/vehicles/
+Content-Type: application/json
